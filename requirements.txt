@@ -22,6 +22,9 @@ langchain-core>=0.2,<1.0
 # Logging
 loguru>=0.7,<1.0
 
+# Testing UI
+streamlit>=1.30,<2.0
+
 # Notebook / EDA (optional)
 matplotlib>=3.7,<4.0
 seaborn>=0.13,<1.0

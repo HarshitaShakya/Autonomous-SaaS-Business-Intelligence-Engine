@@ -18,3 +18,20 @@ logs/
 # beside it.
 /.plugins/
 /.opencode-skills/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+dist/
+build/
+venv/
+.venv/
+*.so
+.mypy_cache/
+.pytest_cache/
+
+# Data (keep raw in repo via LFS, ignore processed)
+data/processed/
