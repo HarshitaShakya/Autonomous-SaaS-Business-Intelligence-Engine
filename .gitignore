@@ -12,6 +12,14 @@ logs/
 .claude-replay.*
 .tmp-*
 
+# Action agent local configuration, runtime caches, and audit output
+action_agent/.env
+action_agent/.env.*
+!action_agent/.env.example
+action_agent/__pycache__/
+action_agent/*.py[cod]
+action_agent/audit_log.jsonl
+
 # Platform-managed agentplat state, not project source. In the
 # client-initiated single-repo workspace layout (make's `Path: "."` spec) the
 # repo root IS the workspace root, so these land inside this repo rather than
