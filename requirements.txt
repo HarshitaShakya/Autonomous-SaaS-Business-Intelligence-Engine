@@ -16,8 +16,10 @@ lifelines>=0.27,<1.0
 # Causal Inference (Double ML)
 econml>=0.15,<1.0
 
-# LangChain (LCEL wrappers — no LLM calls needed)
+# LangChain (LCEL wrappers + Strategy Agent LLM reasoning)
 langchain-core>=0.2,<1.0
+langchain>=0.2,<1.0
+langchain-openai>=0.1,<1.0
 
 # Logging
 loguru>=0.7,<1.0

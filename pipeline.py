@@ -173,6 +173,22 @@ def main() -> None:
         f"Significant: {sum(1 for e in feature_result.effects if e.is_significant)}"
     )
 
+    # ── Step 4: Strategy Agent ───────────────────────────────────────
+    logger.info("-" * 60)
+    logger.info("Running Agent 4: Strategy Agent (LLM Reasoning)")
+    logger.info("-" * 60)
+
+    from agents.strategy_agent import run as run_strategy, to_action_agent_inputs
+    t4 = time.time()
+    strategy_result = run_strategy(behavior_result, churn_result, feature_result)
+    t4_elapsed = time.time() - t4
+
+    logger.info(f"Agent 4 complete in {t4_elapsed:.1f}s")
+    logger.info(
+        f"  Recommendations: {len(strategy_result.recommendations)}, "
+        f"Engine: {strategy_result.pipeline_metadata.get('reasoning_engine', 'unknown')}"
+    )
+
     # ── Assemble combined output ─────────────────────────────────────
     total_elapsed = time.time() - t0
 
@@ -187,11 +203,14 @@ def main() -> None:
                 "user_behavior": round(t1_elapsed, 2),
                 "churn_prediction": round(t2_elapsed, 2),
                 "feature_analysis": round(t3_elapsed, 2),
+                "strategy": round(t4_elapsed, 2),
             },
         },
         "user_behavior": behavior_result.model_dump(),
         "churn_prediction": churn_result.model_dump(),
         "feature_analysis": feature_result.model_dump(),
+        "strategy": strategy_result.model_dump(),
+        "action_agent_inputs": to_action_agent_inputs(strategy_result),
     }
 
     # ── Output ───────────────────────────────────────────────────────
@@ -245,6 +264,28 @@ def main() -> None:
                 f"[{eff.ci_lower:.4f}, {eff.ci_upper:.4f}]"
             )
 
+        print(f"\n[AGENT 4] Strategy Agent:")
+        print(
+            f"   Engine: {strategy_result.pipeline_metadata.get('reasoning_engine', 'unknown')}"
+        )
+        print(
+            f"   Segments analysed: {strategy_result.segments_analysed}, "
+            f"Flagged: {strategy_result.segments_flagged}"
+        )
+        print(f"   Recommendations ({len(strategy_result.recommendations)}):")
+        for rec in strategy_result.recommendations:
+            print(
+                f"   [{rec.urgency.upper()}] {rec.segment_label} -> "
+                f"{rec.action_type.value} "
+                f"(confidence={rec.confidence_score:.2f}, "
+                f"impact={rec.estimated_impact:+.1f})"
+            )
+            # Print first 200 chars of justification
+            justification_preview = rec.justification[:200]
+            if len(rec.justification) > 200:
+                justification_preview += "..."
+            print(f"      {justification_preview}")
+
         print("\n" + "=" * 60)
         print("Pipeline complete. Full JSON available with --output flag.")
         print("=" * 60)
@@ -258,3 +299,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

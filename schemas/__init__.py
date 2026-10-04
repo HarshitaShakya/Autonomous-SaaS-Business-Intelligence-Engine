@@ -16,6 +16,14 @@ from schemas.agent_outputs import (
     CustomerChurnRisk,
     CausalFeatureEffect,
 )
+from schemas.strategy_outputs import (
+    ActionTypeEnum,
+    CausalEvidence,
+    SegmentRecommendation,
+    SegmentRiskEvidence,
+    StrategyAgentInput,
+    StrategyAgentResult,
+)
 
 __all__ = [
     "CanonicalRecord",
@@ -26,4 +34,10 @@ __all__ = [
     "CustomerCluster",
     "CustomerChurnRisk",
     "CausalFeatureEffect",
+    "ActionTypeEnum",
+    "CausalEvidence",
+    "SegmentRecommendation",
+    "SegmentRiskEvidence",
+    "StrategyAgentInput",
+    "StrategyAgentResult",
 ]
