@@ -1,0 +1,31 @@
+# Autonomous SaaS BI Engine — Python Dependencies
+# ================================================
+# Install with: pip install -r requirements.txt
+
+# Core
+pydantic>=2.0,<3.0
+pandas>=2.0,<3.0
+numpy>=1.24,<3.0
+
+# ML / Clustering
+scikit-learn>=1.3,<2.0
+
+# Survival Analysis
+lifelines>=0.27,<1.0
+
+# Causal Inference (Double ML)
+econml>=0.15,<1.0
+
+# LangChain (LCEL wrappers — no LLM calls needed)
+langchain-core>=0.2,<1.0
+
+# Logging
+loguru>=0.7,<1.0
+
+# Testing UI
+streamlit>=1.30,<2.0
+
+# Notebook / EDA (optional)
+matplotlib>=3.7,<4.0
+seaborn>=0.13,<1.0
+jupyter>=1.0,<2.0
