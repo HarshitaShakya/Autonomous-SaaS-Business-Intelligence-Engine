@@ -2,6 +2,11 @@
 # ================================================
 # Install with: pip install -r requirements.txt
 
+# Web API (backend server)
+fastapi>=0.110,<1.0
+uvicorn[standard]>=0.29,<1.0
+python-multipart>=0.0.9,<1.0
+
 # Core
 pydantic>=2.0,<3.0
 pandas>=2.0,<3.0
